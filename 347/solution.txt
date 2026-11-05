@@ -1,0 +1,31 @@
+#include <vector>
+#include <unordered_map>
+#include <queue>
+
+class Solution {
+public:
+    std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+    
+        std::unordered_map<int, int> countMap;
+        for (int num : nums) {
+            countMap[num]++;
+        }
+
+        
+
+
+        std::priority_queue<std::pair<int, int>> maxHeap;
+        for (auto& entry : countMap) {
+            maxHeap.push({entry.second, entry.first});
+        }
+
+    
+          std::vector<int> result;
+             for (int i = 0; i < k; ++i) {
+            result.push_back(maxHeap.top().second);
+               maxHeap.pop();
+        }
+
+        return result;
+    }
+};
